@@ -1,2 +1,2 @@
 # mcp-server
-Dataog MCP Server
+Datadog MCP Server
