@@ -9,7 +9,20 @@ Datadog's managed [MCP server](https://modelcontextprotocol.io/) connects your A
 For Claude Code (US1 [site](https://docs.datadoghq.com/getting_started/site/)):
 
 ```bash
-claude mcp add --transport http datadog-mcp https://mcp.datadoghq.com/api/unstable/mcp-server/mcp
+claude mcp add --transport http datadog https://mcp.datadoghq.com/api/unstable/mcp-server/mcp
+```
+
+Many MCP clients also support configuration in a `.mcp.json` file:
+
+```json
+{
+  "mcpServers": {
+    "datadog": {
+      "type": "http",
+      "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp"
+    }
+  }
+}
 ```
 
 The MCP server should work with any standards-compliant MCP client. See the [full setup docs](https://docs.datadoghq.com/bits_ai/mcp_server/setup/) for other clients, alternative auth methods, and regional endpoints.
