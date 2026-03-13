@@ -27,6 +27,11 @@ Many MCP clients also support configuration in a `.mcp.json` file:
 
 The MCP server should work with any standards-compliant MCP client. See the [full setup docs](https://docs.datadoghq.com/bits_ai/mcp_server/setup/) for other clients, alternative auth methods, and regional endpoints.
 
+## Examples
+
+- [`examples/claude-agent-sdk/`](examples/claude-agent-sdk/) — Minimal agent using the Claude Agent SDK with the Datadog MCP server
+- [`examples/claude-agent-sdk-advanced/`](examples/claude-agent-sdk-advanced/) — Agent with a custom Slack tool and Datadog LLM Observability tracing
+
 ## Links
 
 - [Setup docs](https://docs.datadoghq.com/bits_ai/mcp_server/setup/) - Full setup instructions, available tools, example prompts
