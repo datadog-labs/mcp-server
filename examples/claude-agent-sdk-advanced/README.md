@@ -13,7 +13,7 @@ cp .env.example .env
 You'll need:
 - `DD_API_KEY` and `DD_APPLICATION_KEY` — your [Datadog API and application keys](https://docs.datadoghq.com/account_management/api-app-keys/)
 - `SLACK_WEBHOOK_URL` — a [Slack incoming webhook](https://api.slack.com/messaging/webhooks) URL
-- The `DD_LLMOBS_*` variables enable LLM Observability tracing
+- The `DD_LLMOBS_*` variables (to enable LLM Observability tracing)
 
 ## Usage
 
