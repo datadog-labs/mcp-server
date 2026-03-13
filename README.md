@@ -32,5 +32,4 @@ The MCP server should work with any standards-compliant MCP client. See the [ful
 
 ## Links
 
-- [Setup docs](https://docs.datadoghq.com/bits_ai/mcp_server/setup/) - Full setup instructions, available tools, example prompts
-- [Feedback form](https://docs.google.com/forms/d/e/1FAIpQLSeorvIrML3F4v74Zm5IIaQ_DyCMGqquIp7hXcycnCafx4htcg/viewform) - Share feedback or report issues
+- [Docs](https://docs.datadoghq.com/bits_ai/mcp_server/) - Full setup instructions, available tools, example prompts
