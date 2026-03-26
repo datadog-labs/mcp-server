@@ -1,5 +1,18 @@
 # Changelog
 
+## March 24, 2026
+
+- Fixed an issue preventing ChatGPT from connecting to the MCP server.
+
+## March 19, 2026
+
+- Added `aggregate_rum_events`, `aggregate_events`, and `aggregate_spans` tools to the new `aggregation` toolset for computing metrics, counts, and groupings over RUM events, events, and spans. (This toolset is experimental — these tools will likely move to other toolsets in the future.)
+
+## March 18, 2026
+
+- `get_datadog_trace` and `search_datadog_spans` (`apm` toolset) now include deep links to the trace view in Datadog, so agents can share direct URLs instead of constructing them.
+- Fixed a bug where month-based relative time ranges (e.g., `now-2M`) were silently interpreted as minutes.
+
 ## March 17, 2026
 
 - Fixed an issue preventing Gemini CLI from connecting to the MCP server
