@@ -1,5 +1,27 @@
 # Changelog
 
+## April 3, 2026
+
+- Fixed a pagination bug in `search_datadog_service_dependencies` (`core` toolset) that could return incomplete results.
+
+## April 2, 2026
+
+- `search_datadog_metrics` (`core` toolset) now searches over the last 2 weeks by default, up from 1 hour.
+- The OAuth consent screen is now more user-friendly; now shows OAuth client names instead of IDs.
+
+## March 31, 2026
+
+- A new `submit_mcp_feedback` tool (`core` toolset) has been added – agents can use it to tell us about bugs and missing features.
+
+## March 30, 2026
+
+- Aggregate tools (`aggregate_rum_events`, `aggregate_events`, `aggregate_spans`) have been added to the `core` toolset to help agents reason about large numbers of items in aggregate.
+
+## March 27, 2026
+
+- Added `toolsets=all` shorthand that expands to all generally-available toolsets.
+- Reduced token usage of `core` toolset tool definitions by ~15%.
+
 ## March 24, 2026
 
 - Fixed an issue preventing ChatGPT from connecting to the MCP server.
