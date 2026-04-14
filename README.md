@@ -23,6 +23,8 @@ Many MCP clients also support configuration in a `.mcp.json` file:
 }
 ```
 
+> **Not on the US1 site?** Replace `mcp.datadoghq.com` with the endpoint for your [Datadog site](https://docs.datadoghq.com/getting_started/site/) — for example, EU users should use `mcp.datadoghq.eu`.
+
 The MCP server should work with any standards-compliant MCP client. See the [full setup docs](https://docs.datadoghq.com/bits_ai/mcp_server/setup/) for other clients, alternative auth methods, and regional endpoints.
 
 ## Automated Agent Examples
