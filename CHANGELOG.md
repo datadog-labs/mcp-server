@@ -1,5 +1,44 @@
 # Changelog
 
+## April 17, 2026
+
+- The `ddsql` toolset is now generally available.
+- `search_datadog_logs` (`core` toolset) now accepts a `clustering_pattern_field` argument to cluster logs by a specific field.
+
+## April 16, 2026
+
+- `get_datadog_error_tracking_issue` (`error-tracking` toolset) now includes an `impact` field.
+- Log search and analysis tools (`core` toolset) now return helpful timeout messages instead of opaque errors.
+
+## April 15, 2026
+
+- `aggregate_rum_events`, `aggregate_spans`, and `aggregate_events` (`core` toolset) now support percentile aggregation.
+- `create_datadog_notebook` (`core` toolset) can now create private notebooks.
+- Security signals tools (`security` toolset) now support filtering by `event_tracker_id`.
+- The `whoami` MCP resource (`core` toolset) now includes `user_uuid`.
+- Date-only ISO 8601 strings (e.g., `2026-04-15`) are now parsed as midnight UTC.
+
+## April 13, 2026
+
+- The `kubernetes` toolset is now generally available.
+- The `reference-tables` toolset is now generally available.
+- Improved `analyze_security_findings` (`security` toolset) tool documentation.
+
+## April 9, 2026
+
+- The `dashboards` toolset is now generally available.
+- Notebook create/edit tools (`core` toolset) unified around the raw API cell format and now support general widget types.
+
+## April 7, 2026
+
+- `search_datadog_notebooks` (`core` toolset) now accepts `count` and `include_facets` parameters.
+- `search_datadog_service_dependencies` (`core` toolset) now defaults to `downstream` direction.
+- Removed unused boolean filter parameters from `search_datadog_metrics` (`core` toolset).
+
+## April 6, 2026
+
+- Fixed `search_datadog_monitors` (`core` toolset) sort parameter validation.
+
 ## April 3, 2026
 
 - Fixed a pagination bug in `search_datadog_service_dependencies` (`core` toolset) that could return incomplete results.
