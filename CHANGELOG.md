@@ -1,5 +1,68 @@
 # Changelog
 
+## May 22, 2026
+
+- Error tracking tools (`error-tracking` toolset) now include regression metadata: `get_datadog_error_tracking_issue` includes a `regression` block (with resolved and regressed timestamps and version), and `search_datadog_error_tracking_issues` marks regressed issues with `is_regression: true`.
+
+## May 21, 2026
+
+- Fixed `search_datadog_services` (`core` toolset) not returning results for services whose catalog defines a custom display name.
+
+## May 20, 2026
+
+- New `update_datadog_error_tracking_issue` tool (`error-tracking` toolset) for updating issue state and assignee.
+- Fixed incident tools (`core` toolset) producing URLs with the wrong base domain for orgs that use a custom Datadog subdomain.
+- `get_datadog_metric` (`core` toolset) now defaults the `aggregator` to `avg` in scalar mode instead of returning an error when it's omitted.
+
+## May 19, 2026
+
+- Fixed `search_datadog_incidents` (`core` toolset) returning no results when state filters used uppercase letters (e.g. `ACTIVE`).
+- `get_datadog_flaky_tests` (`software-delivery` toolset) now includes a direct link to each test's history page in Datadog.
+- The daily tool-call rate limit has been removed; only burst (50 calls/10s) and monthly (50,000 calls/month) limits now apply.
+- `search_datadog_metrics` (`core` toolset) now silently clamps oversized `max_tokens` values instead of returning an error.
+- Fixed multi-word fuzzy search in `list_datadog_skills` (`skills` toolset) — searches like "security findings" now return results correctly.
+- OAuth now accepts the `cursor-dev://` callback URI scheme, allowing Cursor IDE to complete the authorization flow.
+
+## May 18, 2026
+
+- New `run_network_path` tool (`networks` toolset) for triggering on-demand traceroute tests via a Private Action Runner host.
+
+## May 15, 2026
+
+- New `list_reference_table_rows` tool (`reference-tables` toolset) for paginating through rows in a reference table.
+
+## May 14, 2026
+
+- `search_datadog_monitors` (`core` toolset) now accepts an `include_tags` parameter to return monitor tags in results, with wildcard support.
+
+## May 13, 2026
+
+- New `get_datadog_security_filters` tool (`security` toolset) for listing and fetching Cloud SIEM security filters.
+
+## May 12, 2026
+
+- `get_datadog_error_tracking_issue` (`error-tracking` toolset) now includes a `suspect_commit` field when Error Tracking has identified the likely responsible commit.
+- `search_datadog_error_tracking_issues` (`error-tracking` toolset) now supports filtering by issue state (e.g. `open`, `resolved`, `for_review`).
+- New `update_datadog_flaky_test_states` tool (`software-delivery` toolset) for quarantining, disabling, or marking flaky tests as fixed.
+- Fixed `search_datadog_logs` (`core` toolset) returning incomplete error details for log events with both application-level error fields and error-tracking metadata.
+
+## May 11, 2026
+
+- `edit_datadog_notebook` (`core` toolset) now supports renaming a notebook and setting template variables as metadata-only edits, without re-uploading cell content.
+- `get_datadog_notebook` (`core` toolset) now returns `template_variables` and `tags`.
+
+## May 6, 2026
+
+- Data Streams (`data-streams` toolset) Kafka tools now return a link to the Kafka setup documentation when queried in an environment where DSM or Kafka monitoring hasn't been configured.
+
+## May 5, 2026
+
+- `edit_datadog_notebook` and `create_datadog_notebook` (`core` toolset) now accept the legacy `cells`-as-string format and `id` parameter, restoring compatibility for integrations that haven't yet adopted the April 21 API changes.
+
+## May 4, 2026
+
+- New `analyze_datadog_security_signals` tool (`security` toolset) for AI-powered batch analysis of security signals, now available to all organizations with the `security` toolset enabled.
+
 ## April 30, 2026
 
 - Added an `omit_tools` query parameter for disabling specific tools at connection time.
