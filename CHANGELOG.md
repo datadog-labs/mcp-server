@@ -1,5 +1,49 @@
 # Changelog
 
+## April 30, 2026
+
+- Added an `omit_tools` query parameter for disabling specific tools at connection time.
+- `list_reference_tables` (`reference-tables` toolset) now includes primary key info in schema output.
+
+## April 29, 2026
+
+- New `create_datadog_security_suppression`, `update_datadog_security_suppression`, and `delete_datadog_security_suppression` tools (`security` toolset).
+- `search_datadog_metrics` (`core` toolset) now returns up to 1,000 results per query (up from a much smaller cap) and produces more reliable results for historical time ranges.
+- Error tracking tools (`error-tracking` toolset) now return human-readable display names for issue states (e.g., "In Progress" instead of `INPROGRESS`).
+- OAuth now supports CORS for the `datadoghq.eu` domain so EU-based browser clients can complete the auth flow.
+
+## April 27, 2026
+
+- Log search tools (`core` toolset) now expose `span_id` and `trace_id` in detailed and TSV output, enabling log-to-trace navigation.
+
+## April 24, 2026
+
+- `search_datadog_logs` (`core` toolset) now accepts a `pattern_group_by` parameter for grouping log patterns by a field.
+- `create_datadog_notebook` (`core` toolset) now tolerates invalid notebook names instead of failing.
+- Renamed `security_signals_schema` to `datadog_security_signals_schema` (`security` toolset).
+
+## April 23, 2026
+
+- `get_datadog_metric` (`core` toolset) now supports scalar queries and structured query inputs.
+- New `get_datadog_security_signal` tool (`security` toolset) for fetching individual security signals.
+- Aggregate tools (`aggregate_rum_events`, `aggregate_spans`, `aggregate_events` in `core` toolset) now surface dropped compute outputs when responses are truncated.
+
+## April 22, 2026
+
+- `append_reference_table_rows` (`reference-tables` toolset) now requires both read and write permissions on reference tables.
+
+## April 21, 2026
+
+- Notebook tools (`core` toolset): the `cells` argument is now an array of structured cells (previously a string), and the notebook ID parameter was renamed from `id` to `notebook_id`.
+
+## April 20, 2026
+
+- `search_datadog_error_tracking_issues` (`error-tracking` toolset) now supports filtering by assignee.
+
+## April 19, 2026
+
+- Aggregate tools (`aggregate_rum_events`, `aggregate_spans`, `aggregate_events` in `core` toolset) now support response flattening, token budgets, and pagination for large result sets.
+
 ## April 17, 2026
 
 - The `ddsql` toolset is now generally available.
