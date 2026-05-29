@@ -1,5 +1,21 @@
 # Changelog
 
+## May 29, 2026
+
+- New `retry_datadog_ci_job` tool (`software-delivery` toolset) for queuing retries of failed GitHub Actions CI jobs.
+- Fixed `search_datadog_logs` (`core` toolset) `extra_fields` matching — field names without a source prefix (e.g. `caller`) now match again and no longer need to be written as `custom.caller` or `attributes.caller`.
+
+## May 27, 2026
+
+- Fixed `search_datadog_metrics` (`core` toolset) returning errors for certain tag filter combinations.
+
+## May 26, 2026
+
+- `update_datadog_security_signals_triage` (`security` toolset) is now available to all organizations with the `security` toolset enabled.
+- `create_datadog_notebook` and `edit_datadog_notebook` (`core` toolset) now accept a `tags` parameter for setting notebook tags.
+- Fixed `search_datadog_service_dependencies` (`core` toolset) crashing on services with cyclic dependency graphs.
+- Fixed `search_datadog_monitors` (`core` toolset) not honoring sort direction when using suffixes like `title,asc` or `title,desc`.
+
 ## May 22, 2026
 
 - Error tracking tools (`error-tracking` toolset) now include regression metadata: `get_datadog_error_tracking_issue` includes a `regression` block (with resolved and regressed timestamps and version), and `search_datadog_error_tracking_issues` marks regressed issues with `is_regression: true`.
