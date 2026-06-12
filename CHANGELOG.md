@@ -1,5 +1,22 @@
 # Changelog
 
+## June 5, 2026
+
+- Fixed `get_datadog_dashboard` (`dashboards` toolset) rejecting numeric integration dashboard IDs (e.g. `30584`). These IDs now resolve correctly via the integration timeboard and screenboard endpoints.
+- Fixed `create_datadog_notebook` (`core` toolset) rejecting valid time spans like `2h` and `3h`. These are now accepted; unsupported values (e.g. `7d`) are coerced to the nearest valid span with a note in the response.
+
+## June 2, 2026
+
+- `analyze_datadog_error_tracking_errors` (`error-tracking` toolset) is now available to all users with the `error-tracking` toolset enabled. Previously it required the `experimental` toolset.
+
+## June 1, 2026
+
+- The `workflows` toolset is now available to HIPAA-compliant organizations.
+
+## May 30, 2026
+
+- `manage_datadog_error_tracking_issue_tickets` (`error-tracking` toolset) now supports creating and linking Linear tickets, in addition to Jira tickets and Datadog cases.
+
 ## May 29, 2026
 
 - New `retry_datadog_ci_job` tool (`software-delivery` toolset) for queuing retries of failed GitHub Actions CI jobs.
