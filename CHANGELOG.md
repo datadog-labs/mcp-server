@@ -1,7 +1,23 @@
 # Changelog
 
+## June 19, 2026
+
+- New `create_notebook_comments` tool (`core` toolset) for adding comments to cells in a Datadog notebook.
+- `search_datadog_error_tracking_issues` (`error-tracking` toolset) now surfaces "Did you mean?" suggestions when a search returns zero results, showing similar valid values for facet filters like `service`, `env`, and `version` so agents can correct and retry without an extra round-trip.
+
+## June 17, 2026
+
+- New `get_datadog_security_detection_rules` tool (`security` toolset) for listing and fetching security detection rules. This replaces the old `list_datadog_security_detection_rules` and `get_datadog_security_detection_rule` tools, which have been removed.
+- `search_datadog_services` (`core` toolset) now returns both the internal service identifier (used in `service:` tag filters) and the human-readable `display_name` from the catalog, so agents can distinguish them correctly.
+
+## June 15, 2026
+
+- Fixed `analyze_datadog_logs` (`core` toolset) incorrectly auto-prepending `@` to column names in `extra_columns`. Column names like `kube_namespace` are now passed through as-is; grouping by tags works correctly without needing to strip or add the prefix manually.
+- Four `security` toolset AppSec tools have been renamed to match Datadog naming standards: `list_security_trace_passlist` → `get_datadog_security_trace_passlist`, `upsert_security_trace_passlist` → `upsert_datadog_security_trace_passlist`, `delete_security_trace_passlist` → `delete_datadog_security_trace_passlist`, `list_datadog_security_aap_denylist` → `get_datadog_security_aap_denylist`. The old names no longer work.
+
 ## June 5, 2026
 
+- New `upsert_reference_table_rows` tool (`reference-tables` toolset) for inserting or updating rows in a reference table by primary key. Tables with composite primary keys are not supported.
 - Fixed `get_datadog_dashboard` (`dashboards` toolset) rejecting numeric integration dashboard IDs (e.g. `30584`). These IDs now resolve correctly via the integration timeboard and screenboard endpoints.
 - Fixed `create_datadog_notebook` (`core` toolset) rejecting valid time spans like `2h` and `3h`. These are now accepted; unsupported values (e.g. `7d`) are coerced to the nearest valid span with a note in the response.
 
