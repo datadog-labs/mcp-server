@@ -1,5 +1,20 @@
 # Changelog
 
+## June 26, 2026
+
+- `explore_profiling_call_graph` (`profiling` toolset): the `service` and `family` top-level parameters have been removed. Scope by service or language family using `filter.query` instead (e.g. `service:my-svc family:java`).
+
+## June 23, 2026
+
+- `get_datadog_notebook` (`core` toolset) now accepts an `include_comments` parameter. When set to `true`, the response includes all comments on the notebook threaded by reply, alongside the notebook cells.
+
+## June 22, 2026
+
+- `manage_datadog_error_tracking_issue_comments` (`error-tracking` toolset) is now available to all users with the `error-tracking` toolset enabled. Previously required the `experimental` toolset. Supports adding, updating, and deleting comments on Error Tracking issues.
+- `get_datadog_error_tracking_issue` (`error-tracking` toolset) now returns an activity timeline — the most recent comments, state changes, and assignee updates for the issue, matching what's shown in the Datadog UI.
+- `create_reference_table` (`reference-tables` toolset) now supports creating empty tables without cloud storage. Pass `source: LOCAL_FILE` to create a table with no backing bucket; rows can then be added with `upsert_reference_table_rows` or `append_reference_table_rows`. Previously all tables required an S3, GCS, or Azure source.
+- Fixed `search_datadog_logs` (`core` toolset) log pattern clustering returning results from live data instead of the archived snapshot when `use_log_patterns: true` was used in an archived log snapshot context.
+
 ## June 19, 2026
 
 - New `create_notebook_comments` tool (`core` toolset) for adding comments to cells in a Datadog notebook.
