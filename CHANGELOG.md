@@ -1,5 +1,30 @@
 # Changelog
 
+## July 3, 2026
+
+- `get_datadog_error_tracking_issue` (`error-tracking` toolset) now surfaces linked GitHub pull requests for an issue, alongside the existing issue details.
+- `search_datadog_events` (`core` toolset) now accepts `asc` and `desc` as aliases for the `sort` parameter (mapping to `timestamp` and `-timestamp`). These common values were previously rejected.
+
+## July 2, 2026
+
+- `get_datadog_metric` (`core` toolset) now accepts the `formulas` parameter when items are provided as objects (e.g. `{"formula": "query0 + query1"}`), not just as plain strings. Previously these calls were rejected.
+
+## July 1, 2026
+
+- New RUM retention filter write tools (`rum` toolset) for creating, updating, reordering, and deleting retention filters, complementing the existing search tool. Each write requires `confirm: true` since retention filters affect data retention and billing.
+- `get_datadog_security_detection_rules` (`security` toolset) now supports requesting a subset of fields, so responses can be trimmed to just what you need.
+- Standardized sorting arguments across several tools: dashboard and notebook search now take `sort` instead of `sort_by` (`dashboards`, `core` toolsets), and `search_datadog_monitors` (`core` toolset) uses `-field` for descending order instead of `field,desc`.
+
+## June 30, 2026
+
+- Fixed `upsert_datadog_spreadsheet` (`sheets` toolset) dropping fields (timeframe, query, schema format) on targeted updates. It now preserves the existing spreadsheet definition instead of wiping unspecified fields.
+
+## June 29, 2026
+
+- The `rum` toolset is now generally available. It includes tools for browsing RUM applications, managing RUM-based metrics, and retrieving RUM insights. `upsert_rum_metric` now also returns a cardinality estimate for the metric you're creating.
+- `retry_datadog_ci_job` (`software-delivery` toolset) now supports retrying GitLab pipelines, in addition to the existing GitHub Actions support.
+- Fixed `search_datadog_services` (`core` toolset) mishandling service or team names that contain colons, which were incorrectly parsed as `field:value` filters.
+
 ## June 26, 2026
 
 - `explore_profiling_call_graph` (`profiling` toolset): the `service` and `family` top-level parameters have been removed. Scope by service or language family using `filter.query` instead (e.g. `service:my-svc family:java`).
