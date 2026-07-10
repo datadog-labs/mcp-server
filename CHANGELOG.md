@@ -1,5 +1,32 @@
 # Changelog
 
+## July 10, 2026
+
+- `get_rum_summary` (`rum` toolset) now reports ANR rate on Android and hang rate on iOS for mobile RUM applications.
+- New `get_datadog_spreadsheet_tab_data` tool (`sheets` toolset) retrieves paginated data from spreadsheet table tabs, with timezone support and stable time-window pagination.
+
+## July 9, 2026
+
+- New `list_datadog_database_optimizations` tool (`dbm` toolset) lists benchmark-validated query optimizations, ranked by measured impact.
+- Fixed `get_datadog_dashboard` (`dashboards` toolset) dropping a template variable's prefix when a dashboard was read and then saved back.
+- `aggregate_spans` (`core` toolset) calls that previously failed with confusing argument errors (missing compute, sort, or group-by fields) now succeed when the intent is clear.
+
+## July 8, 2026
+
+- `get_datadog_error_tracking_issue` (`error-tracking` toolset) no longer fails for users who have Error Tracking read access but not Cases read access; it now only requires Error Tracking read.
+
+## July 7, 2026
+
+- New `cancel_datadog_workflow_instance` tool (`workflows` toolset) cancels a running Workflow Automation execution.
+- New `get_autonomous_system_status` tool (`networks` toolset) reports autonomous system (AS) health by ASN, with an optional time window.
+- The Security Findings tools `search_datadog_security_findings`, `get_datadog_security_findings_schema`, and `analyze_datadog_security_findings` (`security` toolset) are now HIPAA compliant.
+
+## July 6, 2026
+
+- New Data Observability tools `list_data_observability_recommendations` and `get_data_observability_recommendation` (`data-observability` toolset) surface recommendations for improving your data pipelines.
+- `get_datadog_error_tracking_issue` (`error-tracking` toolset) now returns richer error samples, including session replay, trace, and exception-replay details.
+- The dashboard get, create/update, and delete tools (`dashboards` toolset) are now available to organizations with HIPAA compliance enabled; previously they were hidden for those orgs.
+
 ## July 3, 2026
 
 - `get_datadog_error_tracking_issue` (`error-tracking` toolset) now surfaces linked GitHub pull requests for an issue, alongside the existing issue details.
