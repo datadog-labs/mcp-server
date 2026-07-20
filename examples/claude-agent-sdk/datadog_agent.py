@@ -30,7 +30,7 @@ async def main():
         mcp_servers={
             "datadog": {
                 "type": "http",
-                "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp",
+                "url": "https://mcp.datadoghq.com/v1/mcp",
                 "headers": {
                     "DD-API-KEY": os.environ["DD_API_KEY"],
                     "DD-APPLICATION-KEY": os.environ["DD_APPLICATION_KEY"],
