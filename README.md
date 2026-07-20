@@ -7,7 +7,7 @@ Datadog's managed [MCP server](https://docs.datadoghq.com/bits_ai/mcp_server/) c
 For Claude Code (US1 [site](https://docs.datadoghq.com/getting_started/site/)):
 
 ```bash
-claude mcp add --transport http datadog https://mcp.datadoghq.com/api/unstable/mcp-server/mcp
+claude mcp add --transport http datadog https://mcp.datadoghq.com/v1/mcp
 ```
 
 Many MCP clients also support configuration in a `.mcp.json` file:
@@ -17,7 +17,7 @@ Many MCP clients also support configuration in a `.mcp.json` file:
   "mcpServers": {
     "datadog": {
       "type": "http",
-      "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp"
+      "url": "https://mcp.datadoghq.com/v1/mcp"
     }
   }
 }
