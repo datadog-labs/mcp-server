@@ -1,5 +1,72 @@
 # Changelog
 
+## July 28, 2026
+
+- `upsert_datadog_spreadsheet` (`sheets` toolset) now drops empty-content cells before saving, so creating a spreadsheet — or adding a new sheet to an existing one — no longer fails when the definition contains blank cells.
+- `search_datadog_k8s_resources` (`kubernetes` toolset) accepts a new `include_deep_link` option that adds a link to the matching query in the Orchestration Explorer UI.
+
+## July 24, 2026
+
+- `upsert_datadog_dashboard` and `get_datadog_dashboard` (`dashboards`, `core` toolsets) now support additional widget types: Product Analytics cohort, retention, and funnel, plus Sankey and wildcard widgets.
+- New Data Observability monitor annotation tools (`data-observability` toolset) for inspecting, creating/updating, and deleting annotations on data quality monitors, plus entity-aware monitor coverage.
+- `list_datadog_database_optimizations` (`dbm` toolset) now supports pagination, filtering by optimization type, and sorting by estimated improvement.
+- `get_datadog_spreadsheet_tab_data` (`sheets` toolset) now reads pivot tabs, in addition to table tabs.
+- `search_dora_events` (`software-delivery` toolset) now returns the full event object (as YAML), so newly added fields surface automatically.
+
+## July 23, 2026
+
+- `get_datadog_dashboard` and `upsert_datadog_dashboard` (`dashboards`, `core` toolsets) now support dashboard tabs, including per-tab widget layout.
+- Redesigned DORA aggregation: `aggregate_dora_events` (`software-delivery` toolset) now takes composable `queries` and `formulas` (like `get_datadog_metric`) instead of fixed metric types. A new `get_dora_fields` tool discovers the available measures, facets, and aggregations per DORA index.
+
+## July 21, 2026
+
+- `cost_recommendations` (`cost` toolset) can now be sorted by savings, risk, or level of effort.
+
+## July 20, 2026
+
+- `generate_monitor_message` (`alerting` toolset): the `type` parameter is now required, and unsupported monitor types return a clear error instead of failing server-side.
+- Audit Trail tools (`audit-trail` toolset) now include an `audit_trail_explorer_url` in responses — a deep link into the Audit Trail Explorer scoped to the query and time window you just ran.
+- Dashboard tools (`dashboards`, `core` toolsets) now read and write more template variable fields: group-by variables (`type`), a dynamic `available_values_query`, and per-data-source `data_source_mappings`.
+- `get_datadog_spreadsheet_table_data` (`sheets` toolset) is deprecated in favor of `get_datadog_spreadsheet_tab_data`.
+
+## July 16, 2026
+
+- New feature flag onboarding tools (`feature-flags` toolset) that guide you through setting up your first flag: detecting your stack, creating a non-production flag, wiring up the SDK, and verifying it end to end.
+
+## July 15, 2026
+
+- `cost_recommendations` (`cost` toolset) now returns a risk level and a level-of-effort estimate for each recommendation.
+- `get_datadog_security_detection_rules_schema` (`security` toolset) now includes a `rule_search_facets` section describing the facets you can search detection rules by.
+
+## July 14, 2026
+
+- `search_dora_deployments` is renamed to `search_dora_events` (`software-delivery` toolset) and can now retrieve pull requests in addition to deployments.
+
+## July 13, 2026
+
+- `get_synthetics_tests` (`synthetics` toolset) now handles Synthetics test suite public IDs gracefully instead of erroring.
+
+## July 10, 2026
+
+- `get_rum_summary` (`rum` toolset) now reports ANR rate (Android) and hang rate (iOS).
+- New `get_datadog_spreadsheet_tab_data` tool (`sheets` toolset) for reading spreadsheet tab data.
+
+## July 9, 2026
+
+- New `list_datadog_database_optimizations` tool (`dbm` toolset) that lists query optimization suggestions for your databases.
+- `get_datadog_dashboard` (`dashboards`, `core` toolsets) now preserves a template variable's `prefix` when it matches the variable name, fixing a round-trip issue where the prefix was lost on read then update.
+
+## July 7, 2026
+
+- New `get_autonomous_system_status` tool (`networks` toolset) that returns Network Path status for a given autonomous system (AS).
+
+## July 6, 2026
+
+- Audit Trail tools (`audit-trail` toolset) now redact large fields (asset diffs and metadata) by default to keep responses compact; pass `detailed_output: true` for the full events.
+- `get_datadog_error_tracking_issue` (`error-tracking` toolset) now surfaces session replay links and trace IDs for the sampled errors on an issue.
+- `get_synthetics_tests` (`synthetics` toolset) can now attach failure screenshots to browser-test results via a new `include_failure_screenshots` option.
+- New Data Observability recommendations tools (`data-observability` toolset): `list_data_observability_recommendations` and `get_data_observability_recommendation`.
+
 ## July 3, 2026
 
 - `get_datadog_error_tracking_issue` (`error-tracking` toolset) now surfaces linked GitHub pull requests for an issue, alongside the existing issue details.
