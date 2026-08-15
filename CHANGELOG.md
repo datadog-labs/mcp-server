@@ -1,5 +1,43 @@
 # Changelog
 
+## August 11, 2026
+
+- `get_datadog_trace` and `aggregate_spans` (`core` toolset) now include a UI deep link in more response cases — including trace-not-found results and traces without a root span — for live (non-archive) queries.
+
+## August 10, 2026
+
+- `list-stale-feature-flags` and `clean-up-flag` (`feature-flags` toolset) now honor an org-level staleness-window override instead of always using a fixed 30-day cutoff when determining which flags are stale.
+- `get_autonomous_system_status` (`networks` toolset) now automatically pulls in matching Network Path test run evidence when reporting a degraded autonomous system.
+
+## August 7, 2026
+
+- `get_datadog_metric` (`core` toolset) now includes a link to the Metrics Explorer for scalar query results, matching the link already provided for timeseries results.
+- `create-feature-flag` and the allocation-sync tools (`feature-flags` toolset) now accept a future `scheduled_start` for CANARY/FEATURE_GATE allocation rollouts — previously this was rejected.
+
+## August 6, 2026
+
+- New `list_autonomous_system_statuses` tool (`networks` toolset) reports which autonomous systems are currently degraded across your org, without needing to name a specific AS.
+
+## August 4, 2026
+
+- Serverless onboarding (`onboarding` toolset) now supports Azure Container Apps as a compute target, and adds PHP as a supported runtime for GCP Cloud Run, Cloud Run functions, and Azure Container Apps.
+- `search_pr_insights` (`software-delivery` toolset) now documents that an `expected` product status means results are still pending, not that nothing was found.
+
+## July 31, 2026
+
+- New `update_data_observability_recommendation_status` tool (`data-observability` toolset) lets you mark a Data Observability recommendation as applied or dismissed. `list_data_observability_recommendations` gained a `tag_query` argument for filtering by tags, and `get_data_observability_recommendation` now returns the recommendation's tags.
+- `search_datadog_k8s_resources`, `describe_datadog_k8s_resource`, and `get_datadog_k8s_manifest` (`kubernetes` toolset) are more forgiving on the `kind` argument — accepting case variants, plurals, and kubectl shorthand (`pods`, `svc`, `deploy`), plus clearer errors listing valid kinds.
+- `describe_datadog_k8s_resource` (`kubernetes` toolset) now includes container statuses, init container statuses, pod conditions, and the first failing condition's message when describing a pod.
+
+## July 30, 2026
+
+- Serverless onboarding (`onboarding` toolset) now provides dedicated OpenTelemetry setup guidance for GCP Cloud Run instead of the standard Datadog Agent flow.
+
+## July 29, 2026
+
+- `update_datadog_security_signals_triage` (`security` toolset) no longer fails with a permission-denied error when triaging by `filter_query` — it now correctly requires signals read + write permissions instead of write alone.
+- `create_datadog_form`, `update_datadog_form`, `clone_datadog_form`, `get_datadog_form`, `search_datadog_forms`, and `publish_datadog_form` (`forms` toolset) now return a `form_url` field linking directly to the form in the Datadog UI.
+
 ## July 28, 2026
 
 - `upsert_datadog_spreadsheet` (`sheets` toolset) now drops empty-content cells before saving, so creating a spreadsheet — or adding a new sheet to an existing one — no longer fails when the definition contains blank cells.
