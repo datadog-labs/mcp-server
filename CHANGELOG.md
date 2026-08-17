@@ -1,5 +1,110 @@
 # Changelog
 
+## August 11, 2026
+
+- `get_datadog_trace` and `aggregate_spans` (`core` toolset) now include a UI deep link in more response cases — including trace-not-found results and traces without a root span — for live (non-archive) queries.
+
+## August 10, 2026
+
+- `list-stale-feature-flags` and `clean-up-flag` (`feature-flags` toolset) now honor an org-level staleness-window override instead of always using a fixed 30-day cutoff when determining which flags are stale.
+- `get_autonomous_system_status` (`networks` toolset) now automatically pulls in matching Network Path test run evidence when reporting a degraded autonomous system.
+
+## August 7, 2026
+
+- `get_datadog_metric` (`core` toolset) now includes a link to the Metrics Explorer for scalar query results, matching the link already provided for timeseries results.
+- `create-feature-flag` and the allocation-sync tools (`feature-flags` toolset) now accept a future `scheduled_start` for CANARY/FEATURE_GATE allocation rollouts — previously this was rejected.
+
+## August 6, 2026
+
+- New `list_autonomous_system_statuses` tool (`networks` toolset) reports which autonomous systems are currently degraded across your org, without needing to name a specific AS.
+
+## August 4, 2026
+
+- Serverless onboarding (`onboarding` toolset) now supports Azure Container Apps as a compute target, and adds PHP as a supported runtime for GCP Cloud Run, Cloud Run functions, and Azure Container Apps.
+- `search_pr_insights` (`software-delivery` toolset) now documents that an `expected` product status means results are still pending, not that nothing was found.
+
+## July 31, 2026
+
+- New `update_data_observability_recommendation_status` tool (`data-observability` toolset) lets you mark a Data Observability recommendation as applied or dismissed. `list_data_observability_recommendations` gained a `tag_query` argument for filtering by tags, and `get_data_observability_recommendation` now returns the recommendation's tags.
+- `search_datadog_k8s_resources`, `describe_datadog_k8s_resource`, and `get_datadog_k8s_manifest` (`kubernetes` toolset) are more forgiving on the `kind` argument — accepting case variants, plurals, and kubectl shorthand (`pods`, `svc`, `deploy`), plus clearer errors listing valid kinds.
+- `describe_datadog_k8s_resource` (`kubernetes` toolset) now includes container statuses, init container statuses, pod conditions, and the first failing condition's message when describing a pod.
+
+## July 30, 2026
+
+- Serverless onboarding (`onboarding` toolset) now provides dedicated OpenTelemetry setup guidance for GCP Cloud Run instead of the standard Datadog Agent flow.
+
+## July 29, 2026
+
+- `update_datadog_security_signals_triage` (`security` toolset) no longer fails with a permission-denied error when triaging by `filter_query` — it now correctly requires signals read + write permissions instead of write alone.
+- `create_datadog_form`, `update_datadog_form`, `clone_datadog_form`, `get_datadog_form`, `search_datadog_forms`, and `publish_datadog_form` (`forms` toolset) now return a `form_url` field linking directly to the form in the Datadog UI.
+
+## July 28, 2026
+
+- `upsert_datadog_spreadsheet` (`sheets` toolset) now drops empty-content cells before saving, so creating a spreadsheet — or adding a new sheet to an existing one — no longer fails when the definition contains blank cells.
+- `search_datadog_k8s_resources` (`kubernetes` toolset) accepts a new `include_deep_link` option that adds a link to the matching query in the Orchestration Explorer UI.
+
+## July 24, 2026
+
+- `upsert_datadog_dashboard` and `get_datadog_dashboard` (`dashboards`, `core` toolsets) now support additional widget types: Product Analytics cohort, retention, and funnel, plus Sankey and wildcard widgets.
+- New Data Observability monitor annotation tools (`data-observability` toolset) for inspecting, creating/updating, and deleting annotations on data quality monitors, plus entity-aware monitor coverage.
+- `list_datadog_database_optimizations` (`dbm` toolset) now supports pagination, filtering by optimization type, and sorting by estimated improvement.
+- `get_datadog_spreadsheet_tab_data` (`sheets` toolset) now reads pivot tabs, in addition to table tabs.
+- `search_dora_events` (`software-delivery` toolset) now returns the full event object (as YAML), so newly added fields surface automatically.
+
+## July 23, 2026
+
+- `get_datadog_dashboard` and `upsert_datadog_dashboard` (`dashboards`, `core` toolsets) now support dashboard tabs, including per-tab widget layout.
+- Redesigned DORA aggregation: `aggregate_dora_events` (`software-delivery` toolset) now takes composable `queries` and `formulas` (like `get_datadog_metric`) instead of fixed metric types. A new `get_dora_fields` tool discovers the available measures, facets, and aggregations per DORA index.
+
+## July 21, 2026
+
+- `cost_recommendations` (`cost` toolset) can now be sorted by savings, risk, or level of effort.
+
+## July 20, 2026
+
+- `generate_monitor_message` (`alerting` toolset): the `type` parameter is now required, and unsupported monitor types return a clear error instead of failing server-side.
+- Audit Trail tools (`audit-trail` toolset) now include an `audit_trail_explorer_url` in responses — a deep link into the Audit Trail Explorer scoped to the query and time window you just ran.
+- Dashboard tools (`dashboards`, `core` toolsets) now read and write more template variable fields: group-by variables (`type`), a dynamic `available_values_query`, and per-data-source `data_source_mappings`.
+- `get_datadog_spreadsheet_table_data` (`sheets` toolset) is deprecated in favor of `get_datadog_spreadsheet_tab_data`.
+
+## July 16, 2026
+
+- New feature flag onboarding tools (`feature-flags` toolset) that guide you through setting up your first flag: detecting your stack, creating a non-production flag, wiring up the SDK, and verifying it end to end.
+
+## July 15, 2026
+
+- `cost_recommendations` (`cost` toolset) now returns a risk level and a level-of-effort estimate for each recommendation.
+- `get_datadog_security_detection_rules_schema` (`security` toolset) now includes a `rule_search_facets` section describing the facets you can search detection rules by.
+
+## July 14, 2026
+
+- `search_dora_deployments` is renamed to `search_dora_events` (`software-delivery` toolset) and can now retrieve pull requests in addition to deployments.
+
+## July 13, 2026
+
+- `get_synthetics_tests` (`synthetics` toolset) now handles Synthetics test suite public IDs gracefully instead of erroring.
+
+## July 10, 2026
+
+- `get_rum_summary` (`rum` toolset) now reports ANR rate (Android) and hang rate (iOS).
+- New `get_datadog_spreadsheet_tab_data` tool (`sheets` toolset) for reading spreadsheet tab data.
+
+## July 9, 2026
+
+- New `list_datadog_database_optimizations` tool (`dbm` toolset) that lists query optimization suggestions for your databases.
+- `get_datadog_dashboard` (`dashboards`, `core` toolsets) now preserves a template variable's `prefix` when it matches the variable name, fixing a round-trip issue where the prefix was lost on read then update.
+
+## July 7, 2026
+
+- New `get_autonomous_system_status` tool (`networks` toolset) that returns Network Path status for a given autonomous system (AS).
+
+## July 6, 2026
+
+- Audit Trail tools (`audit-trail` toolset) now redact large fields (asset diffs and metadata) by default to keep responses compact; pass `detailed_output: true` for the full events.
+- `get_datadog_error_tracking_issue` (`error-tracking` toolset) now surfaces session replay links and trace IDs for the sampled errors on an issue.
+- `get_synthetics_tests` (`synthetics` toolset) can now attach failure screenshots to browser-test results via a new `include_failure_screenshots` option.
+- New Data Observability recommendations tools (`data-observability` toolset): `list_data_observability_recommendations` and `get_data_observability_recommendation`.
+
 ## July 3, 2026
 
 - `get_datadog_error_tracking_issue` (`error-tracking` toolset) now surfaces linked GitHub pull requests for an issue, alongside the existing issue details.
