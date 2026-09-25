@@ -7,13 +7,13 @@
 ## September 24, 2026
 
 - Software delivery tools (`software-delivery` toolset) now accept date-only time bounds and a `limit` alias on search, reject reversed or empty time windows up front, and return actionable errors instead of opaque ones. Read-only calls are also retried automatically on transient upstream failures.
-- **Breaking change for `execute_code` (`code-exec` toolset):** the `traces` extension has been removed from `@datadog/code-exec`. Scripts that imported it should use the SDK's APM trace API instead, which now covers both full and pruned trace retrieval.
+- **Breaking change for `execute_code` (`code-exec` toolset):** the `traces` extension has been removed from `@datadog/code-exec`. Scripts that imported it should use the SDK's APM trace API instead, which covers both full and pruned traces. Note the response shape differs from the old extension's.
 
 ## September 23, 2026
 
 - Fixed `search_datadog_spreadsheets` (`sheets` toolset) returning the wrong page of results when `start_at` landed on a page boundary — some spreadsheets were unreachable entirely.
 - `get_datadog_k8s_manifest` (`kubernetes` toolset) now explains what to do when a manifest fetch is rate limited, instead of surfacing a bare error.
-- `execute_code` (`code-exec` toolset) now runs every Datadog API call through the generated TypeScript SDK. Trace retrieval and a much wider set of Agent Observability reads are available through it, and archived sessions can now fetch traces too.
+- `execute_code` (`code-exec` toolset) can now fetch traces — full or pruned — including from archived sessions, and read a much wider set of Agent Observability data.
 
 ## September 22, 2026
 
@@ -39,7 +39,7 @@
 
 ## September 8, 2026
 
-- Tool schemas no longer describe optional parameters as nullable type unions. Clients that reject array-valued `type` — notably Vertex AI and Gemini — can now load Datadog MCP tools.
+- Datadog MCP tools now load in Vertex AI and Gemini clients, which previously failed to load them at all because of how optional parameters were declared.
 - `aggregate_events` and `aggregate_spans` (`core` toolset) and `aggregate_rum_events` (`rum` toolset) now accept `P98`, which was previously rejected even though the underlying API supports it.
 - `get_datadog_database_schemas` (`dbm` toolset) now returns indexes, foreign keys, and partition counts for each database instance. These fields were part of the tool's contract but always came back empty.
 
