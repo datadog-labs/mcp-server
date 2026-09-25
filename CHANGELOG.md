@@ -1,5 +1,84 @@
 # Changelog
 
+## September 25, 2026
+
+- `benchmark_datadog_database_query` (`dbm` toolset) now accepts a `table_row_counts` parameter, so you can benchmark against realistic table sizes instead of the default 10,000 rows per table.
+
+## September 24, 2026
+
+- Software delivery tools (`software-delivery` toolset) now accept date-only time bounds and a `limit` alias on search, reject reversed or empty time windows up front, and return actionable errors instead of opaque ones. Read-only calls are also retried automatically on transient upstream failures.
+
+## September 23, 2026
+
+- Fixed `search_datadog_spreadsheets` (`sheets` toolset) returning the wrong page of results when `start_at` landed on a page boundary — some spreadsheets were unreachable entirely.
+- `get_datadog_k8s_manifest` (`kubernetes` toolset) now explains what to do when a manifest fetch is rate limited, instead of surfacing a bare error.
+
+## September 22, 2026
+
+- `ddsql_upsert_saved_query` (`ddsql` toolset) now respects your organization's MCP write protection setting. Previously saved queries could be created or updated even with MCP writes disabled.
+
+## September 16, 2026
+
+- `analyse_datadog_k8s_rollout` (`kubernetes` toolset) is now available to everyone with the toolset enabled. It returns a Deployment rollout in a single call: status, progress, ETA or duration, the ReplicaSet split by revision, and before/after impact on service performance, resource usage, and log volume.
+
+## September 15, 2026
+
+- The RUM operation tools (`rum` toolset) — `search_rum_operations`, `create_rum_operation`, `update_rum_operation`, `delete_rum_operation`, `get_rum_operation_summary`, and `get_rum_operation_insights` — are now available to everyone with the toolset enabled.
+
+## September 11, 2026
+
+- `create_datadog_security_findings_automation_rule` (`security` toolset) now supports Linear as a ticket creation target, alongside Jira and Case Management. Linear-specific fields go in `fields` (`linear_project_id`, `linear_label_ids`).
+- `analyze_cloud_network_monitoring` (`networks` toolset) now rejects wildcard tag values and unrecognized `group_by` tags with a clear error, instead of silently returning results that don't match what you asked for.
+
+## September 9, 2026
+
+- Fixed `analyze_cloud_network_monitoring` (`networks` toolset) using the wrong facet names for client and server availability zone, which made AZ-based filters and group-bys come back empty.
+
+## September 8, 2026
+
+- Tool schemas no longer describe optional parameters as nullable type unions. Clients that reject array-valued `type` — notably Vertex AI and Gemini — can now load Datadog MCP tools.
+- `aggregate_events` and `aggregate_spans` (`core` toolset) and `aggregate_rum_events` (`rum` toolset) now accept `P98`, which was previously rejected even though the underlying API supports it.
+- `get_datadog_database_schemas` (`dbm` toolset) now returns indexes, foreign keys, and partition counts for each database instance. These fields were part of the tool's contract but always came back empty.
+
+## September 7, 2026
+
+- Agentic onboarding (`onboarding` toolset) is no longer restricted to a fixed preview list of language and deployment combinations — any combination the onboarding strategies support is now available.
+
+## September 4, 2026
+
+- `get_datadog_database_explain_plans` (`dbm` toolset) now accepts a `plan_signature` filter, so you can fetch a specific plan directly instead of paging through every plan for a query.
+
+## September 3, 2026
+
+- When you connect over OAuth with read-only access, the server now says so up front: write-capable tools are omitted, and the instructions explain how to reauthorize with full access if a task needs one.
+- Fixed `analyze_cloud_network_monitoring` (`networks` toolset) reporting elevated retransmits as outright network loss.
+
+## September 2, 2026
+
+- `ddsql_run_query` (`ddsql` toolset) now accepts optional `from` and `to` parameters (ISO 8601, Unix seconds or milliseconds, or relative forms like `now-1h`). Without them, queries keep the previous one-hour default window.
+- `get_datadog_database_recommendations` (`dbm` toolset) now includes MongoDB recommendations for queries that scan far more documents than they return.
+- `optimize_datadog_database_query` (`dbm` toolset) now uses the LLM-backed optimization path, so it returns rewritten query suggestions rather than only observations.
+
+## September 1, 2026
+
+- `analyze_cloud_network_monitoring` (`networks` toolset) now includes a Network Analytics deep link with each result, and no longer lets the `Missing`/`N/A` bucket crowd real groups out of the response.
+
+## August 31, 2026
+
+- `get_datadog_k8s_manifest` (`kubernetes` toolset) now accepts an `exclude_fields` parameter, so you can drop specific fields while keeping the rest of the manifest intact. Previously `concise: true` was the only way to trim a manifest, and it also stripped empty-but-required fields, which could make the output an invalid spec.
+
+## August 28, 2026
+
+- The default monthly MCP tool call quota has doubled, from 50,000 to 100,000 calls per organization.
+
+## August 26, 2026
+
+- New `explore_profiling_rum_flamegraph` tool (`profiling` toolset) returns a flamegraph for profiles scoped to RUM events matching a metric such as INP or LCP, resolving the matching RUM events server-side. Previously this meant fetching RUM event IDs yourself and passing them to `explore_profiling_flame_graph`.
+
+## August 20, 2026
+
+- `search_datadog_spans` (`core` toolset) gained a `limit` parameter (1–1000), cursor-based pagination, and a `custom_attributes` parameter for trimming returned attributes to the ones you care about. `start_at` has been removed in favor of `cursor`.
+
 ## August 11, 2026
 
 - `get_datadog_trace` and `aggregate_spans` (`core` toolset) now include a UI deep link in more response cases — including trace-not-found results and traces without a root span — for live (non-archive) queries.

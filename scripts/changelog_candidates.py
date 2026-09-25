@@ -157,8 +157,13 @@ def parse_registry(registry_go: str) -> tuple[dict[str, str], dict[str, dict]]:
     entry_re = re.compile(r"\b(Toolset[A-Za-z0-9]+):\s*\{(.*?)\}", re.DOTALL)
     for m in entry_re.finditer(body):
         const, inner = m.group(1), m.group(2)
+        flat = inner.replace(" ", "")
+        # The registry renamed `isGA` to `legacyToolsetIsGA` in 2026; accept both.
+        ga_keys = ("legacyToolsetIsGA:", "isGA:")
         ga_by_const[const] = {
-            "isGA": "isGA:" in inner and "isGA:false" not in inner.replace(" ", ""),
+            "isGA": any(
+                k in inner and f"{k.replace(' ', '')}false" not in flat for k in ga_keys
+            ),
             "clientVisible": "clientVisible:" in inner
             and "clientVisible:false" not in inner.replace(" ", ""),
             "deprecated": "deprecated:" in inner
