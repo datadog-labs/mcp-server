@@ -7,11 +7,13 @@
 ## September 24, 2026
 
 - Software delivery tools (`software-delivery` toolset) now accept date-only time bounds and a `limit` alias on search, reject reversed or empty time windows up front, and return actionable errors instead of opaque ones. Read-only calls are also retried automatically on transient upstream failures.
+- **Breaking change for `execute_code` (`code-exec` toolset):** the `traces` extension has been removed from `@datadog/code-exec`. Scripts that imported it should use the SDK's APM trace API instead, which now covers both full and pruned trace retrieval.
 
 ## September 23, 2026
 
 - Fixed `search_datadog_spreadsheets` (`sheets` toolset) returning the wrong page of results when `start_at` landed on a page boundary — some spreadsheets were unreachable entirely.
 - `get_datadog_k8s_manifest` (`kubernetes` toolset) now explains what to do when a manifest fetch is rate limited, instead of surfacing a bare error.
+- `execute_code` (`code-exec` toolset) now runs every Datadog API call through the generated TypeScript SDK. Trace retrieval and a much wider set of Agent Observability reads are available through it, and archived sessions can now fetch traces too.
 
 ## September 22, 2026
 
@@ -32,6 +34,7 @@
 
 ## September 9, 2026
 
+- The `code-exec` toolset — `execute_code` and `search_datadog_sdk`, for running sandboxed TypeScript against the Datadog APIs — is now generally available and visible to clients.
 - Fixed `analyze_cloud_network_monitoring` (`networks` toolset) using the wrong facet names for client and server availability zone, which made AZ-based filters and group-bys come back empty.
 
 ## September 8, 2026
@@ -52,12 +55,15 @@
 
 - When you connect over OAuth with read-only access, the server now says so up front: write-capable tools are omitted, and the instructions explain how to reauthorize with full access if a task needs one.
 - Fixed `analyze_cloud_network_monitoring` (`networks` toolset) reporting elevated retransmits as outright network loss.
+- A single oversized response no longer kills an `execute_code` (`code-exec` toolset) run. Results over the size limit now come back as an explicit `result_too_large` failure, and other API calls in the same script still return their results.
+- Archived timeseries aggregations in `execute_code` (`code-exec` toolset) no longer require an explicit `interval`. Omitting it now gives you the documented default of 150 points, matching the live logs, spans, and RUM APIs.
 
 ## September 2, 2026
 
 - `ddsql_run_query` (`ddsql` toolset) now accepts optional `from` and `to` parameters (ISO 8601, Unix seconds or milliseconds, or relative forms like `now-1h`). Without them, queries keep the previous one-hour default window.
 - `get_datadog_database_recommendations` (`dbm` toolset) now includes MongoDB recommendations for queries that scan far more documents than they return.
 - `optimize_datadog_database_query` (`dbm` toolset) now uses the LLM-backed optimization path, so it returns rewritten query suggestions rather than only observations.
+- Archived aggregation queries in `execute_code` (`code-exec` toolset) now support nested group-bys, keeping the sort and limit you set at each level instead of collapsing them into a single global sort and limit.
 
 ## September 1, 2026
 
@@ -78,6 +84,14 @@
 ## August 20, 2026
 
 - `search_datadog_spans` (`core` toolset) gained a `limit` parameter (1–1000), cursor-based pagination, and a `custom_attributes` parameter for trimming returned attributes to the ones you care about. `start_at` has been removed in favor of `cursor`.
+
+## August 19, 2026
+
+- `execute_code` (`code-exec` toolset) can now run timeseries aggregations against archived logs, spans, and RUM data, not just scalar ones.
+
+## August 14, 2026
+
+- `execute_code` (`code-exec` toolset) gained read access to Network Path test runs (live and archived), Cloud Cost Management, and Cloud Network Monitoring connection and DNS aggregates. Writes remain blocked.
 
 ## August 11, 2026
 
