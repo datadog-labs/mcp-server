@@ -1,5 +1,52 @@
 # Changelog
 
+## October 15, 2026
+
+- Relative time ranges now accept year units, so values like `now-1y` work in every tool that takes a relative time. Previously they were rejected.
+- `get_datadog_spreadsheet_table_data` (`sheets` toolset) has been removed. Use `get_datadog_spreadsheet_tab_data` instead, which covers the same data.
+
+## October 13, 2026
+
+- `execute_code` (`code-exec` toolset) is now marked as read-only, matching what it can actually do. Clients that treat write-capable tools differently, such as by asking for approval first, now classify it correctly.
+- `update-feature-flag-environment` (`feature-flags` toolset) can now enable or disable a flag in production environments, subject to your permissions and approval policy. Previously you had to switch to the Datadog UI for this. Default and override variant changes are still limited to non-production environments.
+
+## October 9, 2026
+
+- `search_rum_operations`, `get_rum_operation_summary`, and `get_rum_operation_insights` (`rum` toolset) no longer accept `lookback`. Use `from` and `to` instead, like the other RUM tools. The default window is the last 7 days.
+
+## October 8, 2026
+
+- `search_datadog_rum_events` (`core` and `rum` toolsets) now pages through results with a `cursor`, which replaces `start_at`. Previously, paging past the first 1,000 events returned an empty result that was reported as complete.
+
+## October 7, 2026
+
+- RUM events tools (`rum` toolset) now include a RUM Explorer link, and `search_datadog_rum_events` results include a Session Replay link for events that have a replay.
+- `execute_code` (`code-exec` toolset) can now read Datadog hourly usage and billable usage summaries, and look up which teams a user belongs to.
+
+## October 6, 2026
+
+- `create_datadog_logpoint` (`live-debugger` toolset) can now target every environment at once with `environment: "*"`. Previously this failed.
+
+## October 5, 2026
+
+- `get_datadog_metric_context` (`core` toolset) now returns JSON instead of YAML, matching `search_datadog_metrics` and `get_datadog_metric`.
+
+## September 30, 2026
+
+- New `create-feature-flag-variant` and `update-feature-flag-variant` tools (`feature-flags` toolset) for adding variants to an existing flag and renaming or changing their values.
+- `explore_profiling_rum_flamegraph` (`profiling` toolset) now requires `rumQuery` and rejects blank or match-all queries with a clear message. Calls that left it out used to fail with an unhelpful error.
+- `get_datadog_metric` (`core` toolset) cloud cost queries on `datadog.cost.amortized` now work over OAuth connections. If you're missing the billing or usage permission they need, the response now names the missing permission instead of giving a generic no-data warning.
+- The events tools (`core` toolset) now tell you which argument to fix, with query syntax tips, when a request is rejected.
+
+## September 29, 2026
+
+- Fixed `get_datadog_database_explain_plans` (`dbm` toolset) not returning plans for SQL Server stored procedures.
+- `search_datadog_rum_events` (`core` and `rum` toolsets) now accepts a `limit` parameter.
+
+## September 28, 2026
+
+- The `visualizations` toolset is now generally available. It includes `get_widget` and `visualize_tabular_data`.
+
 ## September 25, 2026
 
 - `benchmark_datadog_database_query` (`dbm` toolset) now accepts a `table_row_counts` parameter, so you can benchmark against realistic table sizes instead of the default 10,000 rows per table.
