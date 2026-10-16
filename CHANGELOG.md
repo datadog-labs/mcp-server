@@ -3,6 +3,7 @@
 ## October 16, 2026
 
 - `aggregate_rum_events` (`rum` toolset) now says when RUM isn't enabled for your organization, matching `search_datadog_rum_events`. Previously it returned empty results.
+- `search_datadog_incidents` (`core` toolset) now returns every ongoing incident when called without a query, including `stable` ones and any custom live statuses. Previously it only returned `active` incidents.
 
 ## October 15, 2026
 
