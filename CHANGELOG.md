@@ -1,5 +1,9 @@
 # Changelog
 
+## October 16, 2026
+
+- `aggregate_rum_events` (`rum` toolset) now says when RUM isn't enabled for your organization, matching `search_datadog_rum_events`. Previously it returned empty results.
+
 ## October 15, 2026
 
 - Relative time ranges now accept year units, so values like `now-1y` work in every tool that takes a relative time. Previously they were rejected.
