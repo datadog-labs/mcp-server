@@ -1,8 +1,68 @@
 # Changelog
 
+## November 6, 2026
+
+- New `search_cost_recommendations` and `aggregate_cost_recommendations` tools (`cost` toolset) for finding cloud cost recommendations and summarizing them, such as total potential savings by resource type.
+
+## November 5, 2026
+
+- The monthly MCP tool-call limit has been removed. Short-term burst limits still apply.
+- `ddsql_validate_query` (`ddsql` toolset) is now available to everyone. It checks a DDSQL query for errors without running it.
+- `search_datadog_metrics` (`core` toolset) now takes its search term as `query`, like the other search tools. `name_filter` still works for now but is deprecated.
+
+## November 4, 2026
+
+- `search_datadog_spans` (`core` toolset) now returns fields under the same names you use in queries (`span_id`, `trace_id`, `resource_name`, …), so values can be copied straight into a filter.
+- `explore_profiling_rum_flamegraph` (`profiling` toolset) now supports RUM operations and mobile apps on iOS and Android, including app launch vitals.
+
+## November 3, 2026
+
+- The `investigator` toolset is now generally available. It lets you start a Bits AI investigation (generally, or for a specific incident), search existing investigations, and fetch their results.
+- `search_datadog_spans` and `aggregate_spans` (`core` toolset) now handle attribute filters written without the `@` prefix, like `http.status_code:500`. Previously these silently matched nothing.
+- `search_datadog_logs` (`core` toolset) now reports log pattern counts as estimated totals rather than counts within the sampled logs.
+- The profiling exploration tools (`profiling` toolset) are now all scoped the same way, through `queryString` or trace context. The `runtimeId` and `profileContext` arguments have been removed. To target one profile, put `profile-id:<id>` in `queryString`.
+
+## November 2, 2026
+
+- `aggregate_spans` (`core` toolset) now accepts `duration` as a compute field instead of rejecting it and asking for `@duration`.
+
+## October 30, 2026
+
+- `get_datadog_trace` (`core` toolset) now reports span start and end times to the microsecond. Previously they were rounded to the second, which made it impossible to order overlapping spans.
+- New `move_datadog_spreadsheet_tab` tool (`sheets` toolset) for reordering tabs. `get_datadog_spreadsheet` now also returns the tab order.
+- `execute_code` (`code-exec` toolset) now says which value was wrong, and what's allowed, when a Datadog API request fails validation.
+
+## October 29, 2026
+
+- `get_datadog_dashboard` and `upsert_datadog_dashboard` (`core` toolset) now return a `revision_id`. Pass it back to `upsert_datadog_dashboard` as `base_revision_id`, and the update is rejected if someone else changed the dashboard since you read it, instead of silently removing widgets they added.
+
+## October 27, 2026
+
+- RUM tools (`rum` toolset) now include links to the matching Datadog page in many more responses.
+
+## October 26, 2026
+
+- `run_network_path` (`networks` toolset) now returns a link to the Network Path result.
+- `analyze_datadog_logs` (`core` toolset) now suggests a supported alternative when a query uses an SQL function that logs don't support, such as `SUBSTR` or `REGEXP_EXTRACT`.
+
+## October 22, 2026
+
+- RUM retention filter tools (`rum` toolset) now see and manage exclusion filters. Previously, trying to delete an exclusion filter reported success without deleting anything.
+- `upsert_datadog_spreadsheet` (`sheets` toolset) now supports conditional formatting on flex sheets.
+
+## October 21, 2026
+
+- `search_datadog_metrics` (`core` toolset) accepts `any` for `percentiles_filter`, for clients that always send every optional argument (such as OpenAI's strict mode). Previously those clients could only hide metrics without percentiles.
+
+## October 19, 2026
+
+- The `derived-metrics` toolset is now generally available. Its `create_derived_metric`, `update_derived_metric`, and `delete_derived_metric` tools manage derived metrics.
+- `aggregate_spans` (`core` toolset) now accepts a sort placed inside a compute, instead of rejecting the request.
+
 ## October 16, 2026
 
 - `aggregate_rum_events` (`rum` toolset) now says when RUM isn't enabled for your organization, matching `search_datadog_rum_events`. Previously it returned empty results.
+- `search_datadog_rum_events` (`core` and `rum` toolsets) now accepts `sort`, like the other search tools.
 - `search_datadog_incidents` (`core` toolset) now returns every ongoing incident when called without a query, including `stable` ones and any custom live statuses. Previously it only returned `active` incidents.
 
 ## October 15, 2026
