@@ -1,5 +1,22 @@
 # Changelog
 
+## November 13, 2026
+
+- `execute_code_write` (`code-exec` and `core` toolsets) is now available to everyone. It runs scripts that can create, update, and delete Datadog resources, while `execute_code` stays read-only. Your existing MCP write permissions and per-API permissions still apply, and you may need to reauthorize an existing connection. Creating or updating dashboards and notebooks isn't supported through it; use `upsert_datadog_dashboard` and the notebook tools instead.
+- `search_datadog_dashboards` (`core` toolset) now reports how many dashboards matched and takes a `limit` of up to 200 results. `start_at` is deprecated.
+- `get_datadog_incident` (`core` toolset) now includes meeting transcripts from the incident timeline.
+
+## November 11, 2026
+
+- `execute_code` (`code-exec` toolset) scripts can now run DDSQL queries, including queries over Error Tracking error events with `dd.errors`.
+- `get_synthetics_tests` and `get_global_variables` (`synthetics` toolset) now say whether there are more results and how to get the next page.
+
+## November 10, 2026
+
+- `apm_get_service_health`, `apm_latency_bottleneck_summary`, `apm_search_recommendations`, `apm_get_recommendation`, and `apm_discover_span_tags` (`apm` toolset) are now generally available.
+- `synthetics_test_wizard` (`synthetics` toolset) now supports multistep API tests and JSONPath, XPath, JSON Schema, and JavaScript assertions.
+- `upsert_datadog_dashboard` (`core` toolset) now accepts `default_timeframe` to set or clear the time range a dashboard opens with.
+
 ## November 6, 2026
 
 - New `search_cost_recommendations` and `aggregate_cost_recommendations` tools (`cost` toolset) for finding cloud cost recommendations and summarizing them, such as total potential savings by resource type.
